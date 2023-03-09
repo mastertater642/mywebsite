@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Random Word Generator</title>
+	<style>
+		.dictionary {
+			border: 1px solid black;
+			padding: 10px;
+			max-width: 600px;
+			margin: 0 auto;
+		}
+
+		h1 {
+			font-size: 32px;
+			margin: 0 0 20px 0;
+			text-align: center;
+		}
+
+		h2 {
+			font-size: 24px;
+			margin: 20px 0 10px 0;
+		}
+
+		p {
+			font-size: 16px;
+			margin: 0 0 10px 0;
+		}
+	</style>
+</head>
+<body>
+	<div class="dictionary">
+		<h1>Random Word Generator</h1>
+		<h2>Word of the Day</h2>
+		<p id="word-of-the-day"></p>
+		<h2>Other Random Words</h2>
+		<p id="random-words"></p>
+		<button onclick="generateWords()">Generate</button>
+	</div>
+
+	<script>
+		// List of vowels and consonants to generate words from
+		var vowels = ['a', 'e', 'i', 'o', 'u'];
+		var consonants = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z'];
+
+		// Function to generate a random word
+		function generateWord() {
+			var length = Math.floor(Math.random() * 10) + 3; // Random length between 3 and 12
+			var word = '';
+
+			// Generate random sequence of consonants and vowels
+			for (var i = 0; i < length; i++) {
+				if (i % 2 == 0) {
+					// Add a consonant
+					var randomIndex = Math.floor(Math.random() * consonants.length);
+					word += consonants[randomIndex];
+				} else {
+					// Add a vowel
+					var randomIndex = Math.floor(Math.random() * vowels.length);
+					word += vowels[randomIndex];
+				}
+			}
+
+			return word;
+		}
+
+		// Function to generate a new set of random words
+		function generateWords() {
+			// Generate word of the day
+			var wordOfTheDay = generateWord();
+
+			// Generate other random words
+			var randomWords = '';
+			for (var i = 0; i < 10; i++) {
+				randomWords += generateWord() + '<br>';
+			}
+
+			// Display words on the page
+			document.getElementById('word-of-the-day').innerHTML = wordOfTheDay;
+			document.getElementById('random-words').innerHTML = randomWords;
+		}
+
+		// Generate initial set of words
+		generateWords();
+	</script>
+</body>
+</html>
